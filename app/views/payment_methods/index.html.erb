@@ -1,5 +1,9 @@
 <h1 class="text-3xl">Payment Methods</h1>
 
+<% if current_user.pay_customers.first.payment_methods.empty? %>
+  <p>You have no payment methods, yet. Add one below to get started.</p>
+<% end %>
+
 <div>
   <div class="flow-root mt-6">
     <ul role="list" class="-my-5 divide-y divide-gray-200">
