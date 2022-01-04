@@ -4,5 +4,8 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import MenuController from "./menu_controller.js"
+application.register("menu", MenuController)
+
+import NewPaymentMethodController from "./new_payment_method_controller.js"
+application.register("new-payment-method", NewPaymentMethodController)

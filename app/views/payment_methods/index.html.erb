@@ -1,0 +1,58 @@
+<h1 class="text-3xl">Payment Methods</h1>
+
+<div>
+  <div class="flow-root mt-6">
+    <ul role="list" class="-my-5 divide-y divide-gray-200">
+      <% current_user.pay_customers.first.payment_methods.each do |payment_method| %>
+        <li class="py-4">
+          <div class="flex items-center space-x-4">
+            <div class="flex-shrink-0">
+              <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">
+                <%= payment_method.brand %> ending in <%= payment_method.last4 %>
+              </p>
+              <p class="text-sm text-gray-500 truncate">
+                Exp: <%= payment_method.exp_month %>/<%= payment_method.exp_year %>
+              </p>
+            </div>
+            <div>
+              <% if payment_method.default? %>
+                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">Default</span>
+              <% else %>
+                <form action="<%= payment_method_path(payment_method) %>" method="post">
+                  <input type="hidden" name="_method" value="PUT">
+                  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                  <button type="submit" class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
+                    Make default
+                  </button>
+                </form>
+              <% end %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<h2 class="text-xl mt-20">Add a payment method</h2>
+
+<form data-controller="new-payment-method" data-action="new-payment-method#submit" data-new-payment-method-client-secret-value="<%= @setup_intent.client_secret %>" data-new-payment-method-return-url-value="<%= payment_methods_url %>" action="/payment_methods" method="post">
+
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="payment_method" value="">
+
+  <div data-new-payment-method-target="paymentElement" id="payment-element"></div>
+
+  <div class="pt-5">
+    <div class="flex justify-end">
+      <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        Save
+      </button>
+    </div>
+  </div>
+
+  <p class="text-red" data-new-payment-method-target="errors"></p>
+</form>
