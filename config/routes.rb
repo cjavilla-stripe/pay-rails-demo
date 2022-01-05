@@ -5,4 +5,11 @@ Rails.application.routes.draw do
   resources :products
   resources :cart_items
   resources :orders
+  resource :subscription do
+    member do
+      get :manage
+    end
+  end
+
+  get '/pricing', to: 'products#pricing'
 end
