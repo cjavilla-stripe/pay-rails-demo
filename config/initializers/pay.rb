@@ -14,20 +14,17 @@ Pay.setup do |config|
   config.routes_path = "/pay" # Only when automount_routes is true
 end
 
-class FulfillCheckout
-  def call(event)
-    checkout_session = event.data.object
+fulfill_checkout = -> (event) {
+  checkout_session = event.data.object
+  customer = Pay::Customer.find_by(processor_id: checkout_session.customer)
+  customer.owner.clear_cart!
 
-    customer = Pay::Customer.find_by(processor_id: checkout_session.customer)
-    customer.owner.clear_cart!
+  return if checkout_session.payment_status != 'paid'
 
-    return if checkout_session.payment_status != 'paid'
+  # Pull from inventory
+  # Print shipping labels
+  # Notify in chat
+}
 
-    # Pull from inventory
-    # Print shipping labels
-    # Notify in chat
-  end
-end
-
-Pay::Webhooks.delegator.subscribe "stripe.checkout.session.async_payment_succeeded", FulfillCheckout.new
-Pay::Webhooks.delegator.subscribe "stripe.checkout.session.completed", FulfillCheckout.new
+Pay::Webhooks.delegator.subscribe "stripe.checkout.session.async_payment_succeeded", fulfill_checkout
+Pay::Webhooks.delegator.subscribe "stripe.checkout.session.completed", fulfill_checkout
