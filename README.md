@@ -1,24 +1,14 @@
-# README
+# A demo using the Pay ruby gem with Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Rails 7
+* Pay
+* Tailwind
+* Devise
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+💳 Use the new Payment Element and Setup Intents to create a new Payment Method in a SCA-friendly way.
+💸 Collect one-time payments using Stripe Checkout and a basic Cart
+💰 Start and manage Subscriptions using Stripe Checkout and the Stripe Customer Portal
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
