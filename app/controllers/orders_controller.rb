@@ -14,7 +14,8 @@ class OrdersController < ApplicationController
       customer_update: {
         shipping: 'auto',
         address: 'auto',
-      }
+      },
+      cancel_url: products_path,
     )
     redirect_to @checkout_session.url, allow_other_host: true, status: :see_other
   end

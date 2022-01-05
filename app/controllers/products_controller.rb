@@ -7,11 +7,4 @@ class ProductsController < ApplicationController
       expand: ['data.product'],
     )
   end
-
-  def show
-    @product = Stripe::Price.retrieve(
-      params[:id],
-      expand: ['product']
-    )
-  end
 end

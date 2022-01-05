@@ -29,4 +29,8 @@ class User < ApplicationRecord
       }
     end
   end
+
+  def clear_cart!
+    cart_items.destroy_all
+  end
 end

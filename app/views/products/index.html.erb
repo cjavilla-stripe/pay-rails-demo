@@ -7,7 +7,7 @@
         <div>
           <div class="relative">
             <div class="relative w-full h-72 rounded-lg overflow-hidden">
-              <img src="https://tailwindui.com/img/ecommerce-images/product-page-03-related-product-01.jpg" alt="Front of zip tote bag with white canvas, black canvas straps and handle, and black zipper pulls." class="w-full h-full object-center object-cover">
+              <img src="<%= price.product.images.try(:first) %>" alt="<%= price.product.description %>" class="w-full h-full object-center object-cover">
             </div>
             <div class="relative mt-4">
               <h3 class="text-sm font-medium text-gray-900"><%= price.product.name %></h3>
@@ -19,7 +19,7 @@
             </div>
           </div>
           <div class="mt-6">
-            <form action="/cart_items" method="post">
+            <form action="/cart_items" method="post" data-remote="true">
               <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
               <input type="hidden" name="cart_item[price]" value="<%= price.id %>">
               <input type="hidden" name="cart_item[quantity]" value="1">
