@@ -12,6 +12,9 @@ module ApplicationHelper
     }, {
       name: 'Customer portal',
       path: '/subscription',
+    }, {
+      name: 'Marketplace',
+      path: '/marketplace',
     }]
   end
 end

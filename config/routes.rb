@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get :manage
     end
   end
+  resource :marketplace
 
   get '/pricing', to: 'products#pricing'
 end

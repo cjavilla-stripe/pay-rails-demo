@@ -43,20 +43,22 @@
 
 <h2 class="text-xl mt-20">Add a payment method</h2>
 
-<form data-controller="new-payment-method" data-action="new-payment-method#submit" data-new-payment-method-client-secret-value="<%= @setup_intent.client_secret %>" data-new-payment-method-return-url-value="<%= payment_methods_url %>" action="/payment_methods" method="post">
+<div class="grid grid-cols-2">
+  <form data-controller="new-payment-method" data-action="new-payment-method#submit" data-new-payment-method-client-secret-value="<%= @setup_intent.client_secret %>" data-new-payment-method-return-url-value="<%= payment_methods_url %>" action="/payment_methods" method="post">
 
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="hidden" name="payment_method" value="">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="payment_method" value="">
 
-  <div data-new-payment-method-target="paymentElement" id="payment-element"></div>
+    <div data-new-payment-method-target="paymentElement" id="payment-element"></div>
 
-  <div class="pt-5">
-    <div class="flex justify-end">
-      <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-        Save
-      </button>
+    <div class="pt-5">
+      <div class="flex justify-end">
+        <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Save
+        </button>
+      </div>
     </div>
-  </div>
 
-  <p class="text-red" data-new-payment-method-target="errors"></p>
-</form>
+    <p class="text-red" data-new-payment-method-target="errors"></p>
+  </form>
+</div>

@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   pay_customer
+  pay_merchant
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -14,6 +15,14 @@ class User < ApplicationRecord
   def maybe_set_payment_processor
     if !self.pay_customers.present?
       set_payment_processor(:stripe)
+    end
+  end
+
+  after_commit :maybe_set_merchant_processor
+
+  def maybe_set_merchant_processor
+    if !self.merchant_processor.present?
+      set_merchant_processor(:stripe)
     end
   end
 
